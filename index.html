@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NBT - The Next Big Thing.</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body onload="showButtons()">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="asset/NBT bianco.svg" alt="NBT Logo" class="navbar-logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <!-- Intentionally left empty -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section class="section home-section">
+        <div class="container-fluid p-0 h-100 position-relative">
+            <!-- Video di background per desktop -->
+            <video id="homeVideo" class="full-frame animate-fade" autoplay muted loop>
+                <source src="asset/home.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <!-- Video di background per dispositivi mobili -->
+            <video id="homeVideoMobile" class="full-frame animate-fade" autoplay muted loop playsinline webkit-playsinline>
+                <source src="asset/home-mobile.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <!-- Pulsante Personalizzato -->
+            <div class="custom-button-container">
+                <a href="#about-section" class="custom-button">Find Out More</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="asset/NBT bianco.svg" alt="NBT Logo" class="footer-logo-img">
+            </div>
+            <div class="footer-section">
+                <h4>About Us</h4>
+                <ul>
+                    <li><a href="#" id="ourStoryLink">Our Story</a></li>
+                    <li><a href="#">Our Vision</a></li>
+                    <li><a href="#">Our Mission</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#">Discover Even</a></li>
+                    <li><a href="#">Discover Hub</a></li>
+                    <li><a href="#">Discover Aura</a></li>
+                    <li><a href="#">Discover Parcel</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><a href="#">Create Whit Us</a></li>
+                    <li><a href="#">Invest in us</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="small">&copy; 2024 NBT - The Next Big Thing. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal fade custom-modal" id="ourStoryModal" tabindex="-1" aria-labelledby="ourStoryModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ourStoryModalLabel">Our Story</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Inserisci qui il contenuto della tua storia -->
+                    <p>Our story begins with the awareness that we can help those who lack the tools to help themselves, 
+                        bringing value to humanity through our startup. </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showButtons() {
+            document.querySelectorAll('.custom-button-container').forEach(function(button) {
+                button.classList.add('show');
+            });
+        }
+
+        document.getElementById('ourStoryLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            $('#ourStoryModal').modal('show');
+        });
+
+        // Funzione per gestire i video di background su dispositivi mobili
+        function handleVideoPlayback() {
+            const homeVideo = document.getElementById('homeVideo');
+            const homeVideoMobile = document.getElementById('homeVideoMobile');
+
+            if (window.innerWidth <= 768) {
+                homeVideo.style.display = 'none';
+                homeVideoMobile.style.display = 'block';
+                homeVideoMobile.play();
+            } else {
+                homeVideo.style.display = 'block';
+                homeVideoMobile.style.display = 'none';
+                homeVideo.play();
+            }
+        }
+
+        // Disabilita interazioni che possono interrompere il video
+        function disableVideoInteraction(videoElement) {
+            videoElement.addEventListener('click', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+            });
+            videoElement.addEventListener('touchstart', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            handleVideoPlayback();
+            window.addEventListener('resize', handleVideoPlayback);
+
+            const homeVideoMobile = document.getElementById('homeVideoMobile');
+            disableVideoInteraction(homeVideoMobile);
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
